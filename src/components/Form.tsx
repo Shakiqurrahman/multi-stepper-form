@@ -34,6 +34,7 @@ const Form = () => {
       <StepperNavigation
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
+        trigger={trigger}
       />
       {/* Form */}
       <form className="mt-12 py-12" onSubmit={handleSubmit(processForm)}>
