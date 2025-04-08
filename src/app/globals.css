@@ -1,2 +1,10 @@
 @import "tailwindcss";
 
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+button {
+  @apply cursor-pointer;
+}
