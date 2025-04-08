@@ -1,12 +1,22 @@
 import { steps } from "@/utils/stepsData";
+import { useState } from "react";
 import { Inputs } from "./Form";
 
 type TProps = {
   currentStep: number;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
   trigger: (fields?: (keyof Inputs)[]) => Promise<boolean>;
+  getValues: () => Inputs;
 };
-const BottomNavigation = ({ currentStep, setCurrentStep, trigger }: TProps) => {
+const BottomNavigation = ({
+  currentStep,
+  setCurrentStep,
+  trigger,
+  getValues,
+}: TProps) => {
+  const [formValues, setFormValues] = useState<Inputs | null>(null);
+  console.log(formValues);
+
   const handlePrev = () => {
     setCurrentStep(currentStep - 1);
   };
@@ -19,14 +29,19 @@ const BottomNavigation = ({ currentStep, setCurrentStep, trigger }: TProps) => {
     } else if (currentStep === 1) {
       fieldsToValidate = ["streetAddress", "city", "zipCode"];
     } else if (currentStep === 2) {
-      fieldsToValidate = ["username", "password", "confirmPassword"];
+      // fieldsToValidate = ["username", "password", "confirmPassword"];
+      fieldsToValidate = [];
+      const formData = getValues();
+      setFormValues(formData);
     }
 
     const isValid = await trigger(fieldsToValidate);
     if (isValid) {
-      setCurrentStep((prev) => prev + 1);
+      setCurrentStep((prev) => prev === 2 ? prev : prev + 1);
     }
   };
+
+  console.log(currentStep);
 
   return (
     <div className="mt-8 pt-5">
@@ -56,7 +71,7 @@ const BottomNavigation = ({ currentStep, setCurrentStep, trigger }: TProps) => {
         <button
           type="button"
           onClick={handleNext}
-          disabled={currentStep === steps.length - 1}
+          disabled={currentStep === steps.length}
           className="rounded bg-white px-2 py-2.5 w-28 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50 flex gap-1 items-center justify-center"
         >
           Next

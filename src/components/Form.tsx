@@ -3,7 +3,7 @@
 import { FormDataSchema } from "@/utils/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import BottomNavigation from "./BottomNavigation";
 import StepperNavigation from "./StepperNavigation";
@@ -17,16 +17,17 @@ const Form = () => {
     handleSubmit,
     // watch,
     reset,
+    getValues,
     trigger,
     formState: { errors },
   } = useForm<Inputs>({
     resolver: zodResolver(FormDataSchema),
   });
 
-  const processForm: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
-    reset();
-  };
+  // const processForm: SubmitHandler<Inputs> = (data) => {
+  //   console.log(data);
+  //   reset();
+  // };
 
   return (
     <div className="mt-16">
@@ -37,7 +38,7 @@ const Form = () => {
         trigger={trigger}
       />
       {/* Form */}
-      <form className="mt-12 py-12" onSubmit={handleSubmit(processForm)}>
+      <form className="mt-12 py-12">
         {currentStep === 0 && (
           <div>
             <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -218,6 +219,7 @@ const Form = () => {
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
         trigger={trigger}
+        getValues={getValues}
       />
     </div>
   );
