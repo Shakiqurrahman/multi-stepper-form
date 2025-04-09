@@ -6,12 +6,14 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import BottomNavigation from "./BottomNavigation";
+import FormPreviewModal from "./FormPreviewModal";
 import StepperNavigation from "./StepperNavigation";
 
 export type Inputs = z.infer<typeof FormDataSchema>;
 
 const Form = () => {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState<number>(0);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -23,11 +25,6 @@ const Form = () => {
   } = useForm<Inputs>({
     resolver: zodResolver(FormDataSchema),
   });
-
-  // const processForm: SubmitHandler<Inputs> = (data) => {
-  //   console.log(data);
-  //   reset();
-  // };
 
   return (
     <div className="mt-16">
@@ -61,7 +58,7 @@ const Form = () => {
                     id="fullName"
                     {...register("fullName")}
                     autoComplete="fullName"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 outline-none duration-300 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6 px-4"
                   />
                   {errors.fullName?.message && (
                     <p className="mt-2 text-sm text-red-400">
@@ -84,7 +81,7 @@ const Form = () => {
                     id="email"
                     {...register("email")}
                     autoComplete="email"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 outline-none duration-300 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6 px-4"
                   />
                   {errors.email?.message && (
                     <p className="mt-2 text-sm text-red-400">
@@ -104,10 +101,10 @@ const Form = () => {
                 <div className="mt-2">
                   <input
                     id="phoneNumber"
-                    type="text"
+                    type="number"
                     {...register("phoneNumber")}
                     autoComplete="phoneNumber"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 outline-none duration-300 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6 px-4"
                   />
                   {errors.phoneNumber?.message && (
                     <p className="mt-2 text-sm text-red-400">
@@ -143,7 +140,7 @@ const Form = () => {
                     id="street"
                     {...register("streetAddress")}
                     autoComplete="street-address"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 outline-none duration-300 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6 px-4"
                   />
                   {errors.streetAddress?.message && (
                     <p className="mt-2 text-sm text-red-400">
@@ -166,7 +163,7 @@ const Form = () => {
                     id="city"
                     {...register("city")}
                     autoComplete="address-level2"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 outline-none duration-300 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6 px-4"
                   />
                   {errors.city?.message && (
                     <p className="mt-2 text-sm text-red-400">
@@ -181,15 +178,15 @@ const Form = () => {
                   htmlFor="zip"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  ZIP / Postal code
+                  ZIP Code
                 </label>
                 <div className="mt-2">
                   <input
-                    type="text"
+                    type="number"
                     id="zip"
                     {...register("zipCode")}
-                    autoComplete="postal-code"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                    autoComplete="zip-code"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 outline-none duration-300 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6 px-4"
                   />
                   {errors.zipCode?.message && (
                     <p className="mt-2 text-sm text-red-400">
@@ -205,21 +202,113 @@ const Form = () => {
         {currentStep === 2 && (
           <>
             <h2 className="text-base font-semibold leading-7 text-gray-900">
-              Complete
+              Account Setup
             </h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">
-              Thank you for your submission.
+              Enter your account details to get started.
             </p>
+            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              <div className="col-span-full">
+                <label
+                  htmlFor="street"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Username
+                </label>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    id="username"
+                    {...register("username")}
+                    autoComplete="username"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 outline-none duration-300 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6 px-4"
+                  />
+                  {errors.username?.message && (
+                    <p className="mt-2 text-sm text-red-400">
+                      {errors.username.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="sm:col-span-3 sm:col-start-1">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Password
+                </label>
+                <div className="mt-2">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    {...register("password")}
+                    autoComplete="password"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 outline-none duration-300 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6 px-4"
+                  />
+                  {errors.password?.message && (
+                    <p className="mt-2 text-sm text-red-400">
+                      {errors.password.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="confirmPassword"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Confirm Password
+                </label>
+                <div className="mt-2">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="confirmPassword"
+                    {...register("confirmPassword")}
+                    autoComplete="confirmPassword"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 outline-none duration-300 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6 px-4"
+                  />
+                  {errors.confirmPassword?.message && (
+                    <p className="mt-2 text-sm text-red-400">
+                      {errors.confirmPassword.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 w-full mt-4">
+              <input
+                type="checkbox"
+                name="showPassword"
+                id="showPassword"
+                className="size-4"
+                onChange={() => setShowPassword(!showPassword)}
+                checked={showPassword}
+              />
+              <label
+                htmlFor="showPassword"
+                className="select-none cursor-pointer text-sm"
+              >
+                Show Password
+              </label>
+            </div>
           </>
         )}
       </form>
+
+      {currentStep === 3 && (
+        <FormPreviewModal
+          formData={getValues()}
+          setCurrentStep={setCurrentStep}
+        />
+      )}
 
       {/* Navigation */}
       <BottomNavigation
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
         trigger={trigger}
-        getValues={getValues}
       />
     </div>
   );

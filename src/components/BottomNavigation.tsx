@@ -1,22 +1,12 @@
 import { steps } from "@/utils/stepsData";
-import { useState } from "react";
 import { Inputs } from "./Form";
 
 type TProps = {
   currentStep: number;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
   trigger: (fields?: (keyof Inputs)[]) => Promise<boolean>;
-  getValues: () => Inputs;
 };
-const BottomNavigation = ({
-  currentStep,
-  setCurrentStep,
-  trigger,
-  getValues,
-}: TProps) => {
-  const [formValues, setFormValues] = useState<Inputs | null>(null);
-  console.log(formValues);
-
+const BottomNavigation = ({ currentStep, setCurrentStep, trigger }: TProps) => {
   const handlePrev = () => {
     setCurrentStep(currentStep - 1);
   };
@@ -29,15 +19,12 @@ const BottomNavigation = ({
     } else if (currentStep === 1) {
       fieldsToValidate = ["streetAddress", "city", "zipCode"];
     } else if (currentStep === 2) {
-      // fieldsToValidate = ["username", "password", "confirmPassword"];
-      fieldsToValidate = [];
-      const formData = getValues();
-      setFormValues(formData);
+      fieldsToValidate = ["username", "password", "confirmPassword"];
     }
 
     const isValid = await trigger(fieldsToValidate);
     if (isValid) {
-      setCurrentStep((prev) => prev === 2 ? prev : prev + 1);
+      setCurrentStep((prev) => prev + 1);
     }
   };
 

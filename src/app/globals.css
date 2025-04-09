@@ -8,3 +8,30 @@ body {
 button {
   @apply cursor-pointer;
 }
+
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Scrollbar CSS For WebKit browsers like Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: #fffff0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d1d1d1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
