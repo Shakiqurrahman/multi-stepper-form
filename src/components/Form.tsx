@@ -16,9 +16,8 @@ const Form = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const {
     register,
-    handleSubmit,
-    // watch,
-    reset,
+    // handleSubmit,
+    // reset,
     getValues,
     trigger,
     formState: { errors },

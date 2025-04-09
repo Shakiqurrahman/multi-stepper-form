@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { Inputs } from "./Form";
 
@@ -11,12 +11,13 @@ type TProps = {
 };
 
 const FormPreviewModal = ({ formData, setCurrentStep }: TProps) => {
+  const [formDetails, setFormDetails] = useState(formData || {});
   const modalRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
   const handleSubmit = () => {
     toast.success("Form submitted successfully!");
-    console.log("🚀formData:", formData);
+    console.log("formDetails:", formDetails);
     router.push("/success");
   };
 
