@@ -11,6 +11,7 @@ type TProps = {
 };
 
 const FormPreviewModal = ({ formData, setCurrentStep }: TProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [formDetails, setFormDetails] = useState(formData || {});
   const modalRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
