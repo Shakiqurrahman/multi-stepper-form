@@ -37,7 +37,7 @@ const BottomNavigation = ({ currentStep, setCurrentStep, trigger }: TProps) => {
           type="button"
           onClick={handlePrev}
           disabled={currentStep === 0}
-          className="rounded bg-white px-2 py-2.5 w-28 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50 flex gap-1 items-center justify-center"
+          className="rounded bg-white px-2 py-2.5 w-28 text-sm font-semibold text-sky-900 shadow-sm ring-1 dark:ring-0 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-60 flex gap-1 items-center justify-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +59,7 @@ const BottomNavigation = ({ currentStep, setCurrentStep, trigger }: TProps) => {
           type="button"
           onClick={handleNext}
           disabled={currentStep === steps.length}
-          className="rounded bg-white px-2 py-2.5 w-28 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50 flex gap-1 items-center justify-center"
+          className="rounded bg-white px-2 py-2.5 w-28 text-sm font-semibold text-sky-900 shadow-sm ring-1 dark:ring-0 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50 flex gap-1 items-center justify-center"
         >
           Next
           <svg

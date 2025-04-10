@@ -34,10 +34,10 @@ const FormPreviewModal = ({ formData, setCurrentStep }: TProps) => {
   }, [setCurrentStep]);
   return (
     <div className="fixed left-0 top-0 z-[999] flex h-screen w-full items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-[600px]  rounded-lg overflow-hidden">
+      <div className="w-full max-w-[600px]  rounded-lg overflow-hidden text-black">
         <div
           ref={modalRef}
-          className="w-full max-h-[95vh] overflow-y-auto bg-white px-4"
+          className="w-full max-h-[85vh] sm:max-h-[95vh] overflow-y-auto bg-white dark:bg-white px-4"
         >
           <h1 className="text-center text-xl font-semibold sticky top-0 bg-white py-5">
             Please Confirm Your Information

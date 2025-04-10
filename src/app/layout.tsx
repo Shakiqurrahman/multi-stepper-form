@@ -1,3 +1,4 @@
+import DarkModeBtn from "@/components/DarkModeBtn";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "react-hot-toast";
@@ -26,8 +27,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-[#0f0f0ff3] text-black dark:text-white`}
       >
+        <div className="flex justify-end absolute top-4 right-4">
+          <DarkModeBtn />
+        </div>
         {children}
         <Toaster position="top-center" />
       </body>

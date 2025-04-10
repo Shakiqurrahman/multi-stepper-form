@@ -57,7 +57,7 @@ const StepperNavigation = ({
                 onClick={() => handleClickStepper(index)}
                 className="group flex w-full flex-col border-l-4 border-gray-200 py-2 pl-4 transition-colors md:border-l-0 md:border-t-4 md:pb-0 md:pl-0 md:pt-4 cursor-pointer"
               >
-                <span className="text-sm font-medium text-gray-500 transition-colors">
+                <span className="text-sm font-medium text-gray-500  dark:text-gray-400 transition-colors">
                   {step.id}
                 </span>
                 <span className="text-sm font-medium">{step.name}</span>

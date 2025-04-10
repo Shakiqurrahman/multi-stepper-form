@@ -1,9 +1,9 @@
-import SubmittedForm from "@/components/SubmittedForm";
+import SuccessBox from "@/components/SuccessBox";
 
 const SuccessPage = () => {
   return (
     <>
-      <SubmittedForm />
+      <SuccessBox />
     </>
   );
 };
