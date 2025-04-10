@@ -6,6 +6,8 @@ A multi-step form built with **Next.js**, **React**, **React Hook Form**, and **
 - Step-by-step navigation through multiple form pages
 
 - Form validation with Zod + React Hook Form
+  
+- Toggling between Dark and Light Mode
 
 - Final form submission handler
 
