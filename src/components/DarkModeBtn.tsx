@@ -3,10 +3,16 @@ import { useEffect, useState } from "react";
 import { FiMoon, FiSun } from "react-icons/fi";
 
 const DarkModeBtn = () => {
-  const [darkMode, setDarkMode] = useState(() => {
+  const [darkMode, setDarkMode] = useState<boolean | null>(null);
+
+  useEffect(() => {
     const savedMode = localStorage.getItem("darkMode");
-    return savedMode ? JSON.parse(savedMode) : true;
-  });
+    if (savedMode !== null) {
+      setDarkMode(JSON.parse(savedMode));
+    } else {
+      setDarkMode(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (darkMode) {

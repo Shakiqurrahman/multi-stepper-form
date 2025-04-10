@@ -1,5 +1,25 @@
 # Multi-Step Form
 
+A multi-step form built with **Next.js**, **React**, **React Hook Form**, and **Zod** for powerful form validation and a smooth user experience.
+
+## 📝 Features
+- Step-by-step navigation through multiple form pages
+
+- Form validation with Zod + React Hook Form
+
+- Final form submission handler
+
+- Optimized for performance and accessibility
+
+## 🚀 Tech Stack
+
+- Next.js
+- React
+- React Hook Form
+- Zod
+- Tailwind CSS
+
+
 ### Getting Started
 
 First, clone the projects
